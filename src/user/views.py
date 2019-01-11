@@ -44,8 +44,8 @@ class FollowersListView(generics.ListAPIView):
 
     def get_queryset(self):
         username = self.kwargs["username"]
-        user = get_object_or_404(models.Profile, user__username=username)
-        return user.followers.all().values("username", "name")
+        user_profile = get_object_or_404(models.Profile, user__username=username)
+        return user_profile.followers.all().values("username", "name")
 
 
 class FollowingListView(generics.ListAPIView):
@@ -53,8 +53,8 @@ class FollowingListView(generics.ListAPIView):
 
     def get_queryset(self):
         username = self.kwargs["username"]
-        user = get_object_or_404(models.Profile, user__username=username)
-        return user.following.all().values("username", "name")
+        user_profile = get_object_or_404(models.Profile, user__username=username)
+        return user_profile.following.all().values("username", "name")
         # return queryset.values("user__name", "user__username").annotate(
         #     name=F("user__name"), username=F("user__username")
         # )
@@ -69,11 +69,13 @@ class Follow(views.APIView):
 
     def get(self, request, username):
         user = self.get_object(username)
+        if user == request.user:
+            return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         try:
-            user.followers.get(user=request.user)
-            return Response({"follows": True})
-        except models.Profile.DoesNotExist:
-            return Response({"follows": False})
+            user.profile.followers.get(username=request.user.username)
+            return Response({"following": True})
+        except models.User.DoesNotExist:
+            return Response({"following": False})
 
     def post(self, request, username):
         user = self.get_object(username)

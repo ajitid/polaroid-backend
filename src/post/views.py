@@ -36,7 +36,7 @@ class PostView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class UserPostListView(generics.ListAPIView):
-    serializer_class = serializers.PostPhotoOnlySerializer
+    serializer_class = serializers.PostThumbnailOnlySerializer
 
     def get_queryset(self):
         username = self.kwargs["username"]

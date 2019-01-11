@@ -39,13 +39,14 @@ class PostWithUrlSerializer(PostSerializer):
         fields = ("url",) + PostSerializer.Meta.fields
 
 
-class PostPhotoOnlySerializer(serializers.ModelSerializer):
-    photo = serializers.ImageField()
+class PostThumbnailOnlySerializer(serializers.ModelSerializer):
+    # photo = serializers.ImageField()
+    thumbnail = serializers.ImageField()
     post = serializers.HyperlinkedIdentityField(view_name="posts:post-detail", lookup_field="id")
 
     class Meta(PostSerializer.Meta):
         model = models.Post
-        fields = ("photo", "post")
+        fields = ("thumbnail", "post")
 
 
 # TODO

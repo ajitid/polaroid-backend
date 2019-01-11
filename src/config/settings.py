@@ -38,8 +38,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "rest_framework",
     "corsheaders",
+    "rest_framework",
+    "knox",
     "imagekit",
     "authentication",
     "user",
@@ -136,7 +137,7 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "knox.auth.TokenAuthentication",
         "rest_framework.authentication.SessionAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticatedOrReadOnly"],
@@ -144,13 +145,12 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 15,
 }
 
-
 # CORS
 
 # FIXME probably based on .env
 CORS_ORIGIN_WHITELIST = ["localhost:8080", "localhost:4000"]
 CORS_URLS_REGEX = r"^/api/.*$"
 
-# JWT
+# Knox - token auth
 
-SIMPLE_JWT = {"ACCESS_TOKEN_LIFETIME": timedelta(days=15), "REFRESH_TOKEN_LIFETIME": timedelta(days=30)}
+REST_KNOX = {"TOKEN_TTL": timedelta(days=3), "USER_SERIALIZER": None, "AUTO_REFRESH": True}

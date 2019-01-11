@@ -12,9 +12,10 @@ django-imagekit = "^4.0"
 djangorestframework = "^3.9"
 markdown = "^3.0"
 django-cors-headers = "^2.4"
-djangorestframework_simplejwt = "^3.3"
+django-rest-knox = "^3.6"
 
 [tool.poetry.dev-dependencies]
+bpython = "^0.17.1"
 
 [build-system]
 requires = ["poetry>=0.12"]

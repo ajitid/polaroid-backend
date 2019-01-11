@@ -21,8 +21,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/auth/", include("authentication.urls")),  # FIXME don't do this on prod
     path("auth/", include("authentication.urls_drf_session_auth")),  # FIXME don't do this on prod
+    path("api/auth/", include("authentication.urls")),  # FIXME don't do this on prod
     path("api/users/", include("user.urls")),
     path("api/posts/", include("post.urls")),
 ]

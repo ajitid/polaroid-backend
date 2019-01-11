@@ -1,6 +1,10 @@
 - post thumbnail deletion, using a cron job and a python script
 - user profile pic api endpoint and imagekit conversion
 
+>>>>>>>>>>>>>>>>>>>>>
+- do blocked user thingy
+- blocked users cannot see media/post photos too
+>>>>>>>>>>>>>>>>>>>>>
 
 - simplify things like
 ```py
