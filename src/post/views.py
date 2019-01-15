@@ -92,6 +92,7 @@ class PostLikeView(views.APIView):
 
 class FeedView(generics.ListAPIView):
     serializer_class = serializers.PostWithUrlSerializer
+    permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
         username = self.request.user.username
